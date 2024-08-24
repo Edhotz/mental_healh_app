@@ -14,6 +14,6 @@ class MeditationRepositoryImpl implements MeditationRepository {
 
   @override
   Future<MoodMessages> getMoodMessage(String mood) async {
-    return await remotedatasource.GetMoodMessages(mood);
+    return await remotedatasource.getMoodMessages(mood);
   }
 }

@@ -5,11 +5,12 @@ class TaskCard extends StatelessWidget {
   final String description;
   final Color color;
 
-  const TaskCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.color});
+  const TaskCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,48 +20,23 @@ class TaskCard extends StatelessWidget {
         color: color,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            width: 5,
+          Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .labelMedium!
+                .copyWith(fontWeight: FontWeight.bold),
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      description,
-                      style: Theme.of(context).textTheme.labelSmall,
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(50)),
-                      child: const Icon(Icons.arrow_forward_ios),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          )
+          const SizedBox(height: 8),
+          Text(
+            description,
+            style: Theme.of(context).textTheme.labelSmall,
+            overflow: TextOverflow.ellipsis, // Handle text overflow
+            maxLines: 3, // Limit the number of lines
+          ),
         ],
       ),
     );

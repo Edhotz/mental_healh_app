@@ -5,6 +5,7 @@ import 'package:mental_healh_app/features/meditations/data/datasources/meditatio
 import 'package:mental_healh_app/features/meditations/domain/usecases/daily_quotes.dart';
 import 'package:mental_healh_app/features/meditations/domain/usecases/get_mood_messages.dart';
 import 'package:mental_healh_app/features/meditations/presentation/bloc/meditation_bloc.dart';
+import 'package:mental_healh_app/features/meditations/presentation/bloc/meditation_event.dart';
 import 'package:mental_healh_app/features/meditations/repositories/meditation_repository_impl.dart';
 import 'package:mental_healh_app/features/music/data/datasources/song_remote_datasource.dart';
 import 'package:mental_healh_app/features/music/data/repository/song_repository_impl.dart';
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
                       repository: MeditationRepositoryImpl(
                     remotedatasource:
                         MeditationRemoteDatasourceImpl(client: http.Client()),
-                  )))),
+                  )))
+                ..add(FetchDailyQuotes())),
         ],
         child: MaterialApp(
           title: "Meditation App",

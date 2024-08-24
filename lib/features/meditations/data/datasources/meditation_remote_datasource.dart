@@ -8,13 +8,14 @@ import 'package:http/http.dart' as http;
 
 abstract class MeditationRemoteDatasource {
   Future<DailyQuotes> getDailyQuote();
-  Future<MoodMessageModel> GetMoodMessages(String mood);
+  Future<MoodMessageModel> getMoodMessages(String mood);
 }
 
 class MeditationRemoteDatasourceImpl implements MeditationRemoteDatasource {
   final http.Client client;
 
   MeditationRemoteDatasourceImpl({required this.client});
+
   @override
   Future<DailyQuotes> getDailyQuote() async {
     final response =
@@ -22,6 +23,8 @@ class MeditationRemoteDatasourceImpl implements MeditationRemoteDatasource {
 
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
+
+      print(jsonResponse);
       return DailyQuotesModel.fromJson(jsonResponse);
     } else {
       throw Exception('Failed to load daily quote');
@@ -29,7 +32,7 @@ class MeditationRemoteDatasourceImpl implements MeditationRemoteDatasource {
   }
 
   @override
-  Future<MoodMessageModel> GetMoodMessages(String mood) async {
+  Future<MoodMessageModel> getMoodMessages(String mood) async {
     final response = await client
         .get(Uri.parse("${Appurls.baseUrl}/meditation/myMood/$mood"));
     if (response.statusCode == 200) {
