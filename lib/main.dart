@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mental_healh_app/core/theme.dart';
+import 'package:mental_healh_app/features/meditations/data/datasources/meditation_remote_datasource.dart';
+import 'package:mental_healh_app/features/meditations/domain/usecases/daily_quotes.dart';
+import 'package:mental_healh_app/features/meditations/domain/usecases/get_mood_messages.dart';
+import 'package:mental_healh_app/features/meditations/presentation/bloc/meditation_bloc.dart';
+import 'package:mental_healh_app/features/meditations/repositories/meditation_repository_impl.dart';
 import 'package:mental_healh_app/features/music/data/datasources/song_remote_datasource.dart';
 import 'package:mental_healh_app/features/music/data/repository/song_repository_impl.dart';
 import 'package:mental_healh_app/features/music/domain/usecase/get_all_songs.dart';
@@ -32,6 +37,18 @@ class MyApp extends StatelessWidget {
                       ),
                     ),
                   )..add(FetchSongs())),
+          BlocProvider(
+              create: (context) => MeditationBloc(
+                  getDailyQuotes: GetDailyQuotes(
+                      repository: MeditationRepositoryImpl(
+                    remotedatasource:
+                        MeditationRemoteDatasourceImpl(client: http.Client()),
+                  )),
+                  getMoodMessages: GetMoodMessages(
+                      repository: MeditationRepositoryImpl(
+                    remotedatasource:
+                        MeditationRemoteDatasourceImpl(client: http.Client()),
+                  )))),
         ],
         child: MaterialApp(
           title: "Meditation App",

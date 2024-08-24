@@ -6,12 +6,14 @@ class Feelingbutton extends StatelessWidget {
   final String label;
   final String image;
   final Color color;
+  final VoidCallback onTap;
 
   const Feelingbutton(
       {super.key,
       required this.label,
       required this.image,
-      required this.color});
+      required this.color,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {

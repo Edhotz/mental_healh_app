@@ -1,4 +1,5 @@
 import 'package:mental_healh_app/features/meditations/domain/entities/daily_quotes.dart';
+import 'package:mental_healh_app/features/meditations/domain/entities/mood_messages.dart';
 
 abstract class MeditationState {}
 
@@ -19,6 +20,6 @@ class DailyQuoteLoaded extends MeditationState {
 }
 
 class MoodMessageLoaded extends MeditationState {
-  final MoodMessageLoaded moodMessage;
+  final MoodMessages moodMessage;
   MoodMessageLoaded({required this.moodMessage});
 }
