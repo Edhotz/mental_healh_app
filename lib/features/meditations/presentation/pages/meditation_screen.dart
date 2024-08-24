@@ -112,7 +112,7 @@ class MeditationScreen extends StatelessWidget {
               ),
             );
           } else if (state is MoodMessageLoaded) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
+            WidgetsBinding.instance.addPostFrameCallback((timestamp) {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -122,7 +122,7 @@ class MeditationScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium),
                   actions: [
                     TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
+                      onPressed: () => Navigator.pop(context),
                       child: Text('Ok',
                           style: Theme.of(context).textTheme.labelSmall),
                     ),
